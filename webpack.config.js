@@ -6,6 +6,7 @@ var extractPlugin = new ExtractTextPlugin({
 });
 
 module.exports = {
+    mode: 'development',
     entry: './src/js/app.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -16,15 +17,17 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
+                exclude: /node_modules/,
                 use: [
                     {
                         loader: 'babel-loader',
                         options: {
-                            presets: ['es2015']
+                            presets: ['@babel/preset-env']
                         }
                     }
                 ]
-            },
+            }
+            ,
             {
                 test: /\.scss$/,
                 use: extractPlugin.extract({
